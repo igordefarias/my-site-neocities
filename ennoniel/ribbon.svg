@@ -1,0 +1,20 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 44" width="100" height="44">
+	<title>ribbon_adpt</title>
+	<defs>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="f1" ><feDropShadow dx="0.5150380749100543" dy="0.8571673007021123" stdDeviation="0" flood-color="#ffffff" flood-opacity=".3"/></filter>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="f2" ><feDropShadow dx="0.5150380749100543" dy="0.8571673007021123" stdDeviation="0" flood-color="#ffffff" flood-opacity=".3"/></filter>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="f3" ><feDropShadow dx="0.5150380749100543" dy="0.8571673007021123" stdDeviation="0" flood-color="#ffffff" flood-opacity=".3"/></filter>
+	</defs>
+	<style>
+		.s0 { fill: #cee1e2 } 
+		.s1 { fill: #a0c6c7 } 
+		.s2 { filter: url(#f1);fill: #8bb5b6 } 
+		.s3 { filter: url(#f2);fill: #8bb5b6 } 
+		.s4 { filter: url(#f3);fill: #8bb5b6 } 
+	</style>
+	<path id="forma bg" fill-rule="evenodd" class="s0" d="m100 0v38h-100v-38z"/>
+	<path id="forma bg bottom" fill-rule="evenodd" class="s1" d="m100 39v5h-100v-5z"/>
+	<path id="Linha Pen" class="s2" d="m0 38h4 7 8 14 14 14 7 12 18 2v1h-1-20-79z"/>
+	<path id="Camada 1" class="s3" d="m0 33h1 4v-1h-5zm10 0v-1h5v1zm10 0v-1h5v1zm10 0v-1h5v1zm10 0v-1h5v1zm10 0v-1h5v1z"/>
+	<path id="Camada 2" class="s4" d="m60 33h1 4v-1h-5zm10 0v-1h5v1zm10 0v-1h5v1zm10 0v-1h5v1z"/>
+</svg>

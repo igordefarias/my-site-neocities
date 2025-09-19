@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ennoniel</title>
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Play:wght@400;700&family=Silkscreen:wght@400;700&family=Sorts+Mill+Goudy:ital@0;1&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f4d4 url('corrugation.png') repeat;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-block: 60px;
+        }
+
+        #ribbon {
+            width: 100%;
+            position: fixed;
+            height: 44px;
+            left: 0;
+            top: 0;
+            background: url('ribbon_verde.svg') repeat-x;
+            z-index: 10;
+        }
+
+        #container {
+            width: 92%;
+            height: 34.1rem;
+            max-width: 68.75rem;
+            display: flex;
+            background: url('bg_bosque.jpg');
+            background-size: cover;
+            background-position: center;
+            border: #bfad83 solid 1px;
+            overflow-y: auto;
+            margin-block: auto;
+        }
+
+        /** Sidebar **/
+
+        #sidebar {
+            width: clamp(7.75rem, 24%, 17.5rem);
+            height: 100%;
+            background-color: rgb(218, 210, 163);
+            color: #75614d;
+            padding: 0.75em;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            overflow: auto;
+        }
+
+        .menu {
+            text-align: center;
+            margin-block: 1rem;
+        }
+
+        .menu-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .menu-row a {
+            font-family: '04b03';
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: #75614d;
+            background-color: #bfad83;
+            padding: 4px 6px;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 60px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .menu-row a:hover {
+            background: #75614d;
+            color: #fefefa;
+            text-shadow: none;
+        }
+
+        /* Esconde o menu inteiro no mobile por padrão */
+        #mobile-menu .menu {
+            display: none;
+        }
+
+        /* Só mostra o menu se o toggle ativar */
+        #mobile-menu.open .menu {
+            display: block;
+        }
+
+        .hamburger-wrapper {
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            user-select: none;
+        }
+
+
+        /* No PC, mostra o menu direto */
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+
+            #mobile-menu {
+                display: block !important;
+            }
+
+            #mobile-menu .menu {
+                display: block;
+            }
+        }
+
+        .profile::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .profile-pic {
+            width: 100%;
+            max-width: 7.5rem;
+            margin-bottom: 0.5em;
+            display: block;
+            float: left;
+            margin: 0 0.625em 0.25em 0;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        /* Fim da Sidebar */
+        /*
+        **
+        **/
+
+        /* Inicio do Conteúdo Central */
+
+        #content {
+            flex: 1;
+            padding-inline: 1em;
+            overflow-y: auto;
+        }
+
+        #status-log-box {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            /* branco com transparência */
+            height: 280px;
+            overflow: auto;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0 0 0;
+        }
+
+        /* cada seção ocupa 50% do espaço */
+        .my-status,
+        .update-log,
+        .entries {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .my-status,
+        p {
+            padding: 0.20rem 0 0.20rem 0;
+        }
+
+        .feeling {
+            background-color: #dad2a3;
+            border-radius: 4px;
+            padding: 0.1rem;
+        }
+
+        .mail-owl {
+            height: 50%;
+            background: url('owl.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #dad2a3;
+            color: #75614d;
+            border: #75614d dashed 2px;
+            margin: 1rem 0 0 0;
+            padding: 1rem;
+        }
+
+        /* .log-2025 {
+            display: block;
+            background-color: #bfad83;
+            color: #fefefa;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 0.25rem 0 0.25rem;
+            border-radius: 10px;
+        } */
+
+        /** UPDATE LOG ACCORDION **/
+
+        .accordion-year {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 100%;
+            background-color: #dad2a3;
+            color: #75614d;
+            text-shadow: 0.5px 0.6px 1px #fefefa;
+            font-weight: bold;
+            padding: 0.303rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Play', cursive;
+            /* font-size: 1.25rem; */
+            cursor: pointer;
+            position: relative;
+        }
+
+
+        .accordion-year::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            /* largura da fitinha */
+            height: 100%;
+            background-color: #75614d;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .accordion-year .arrow {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 0.1rem 0 0.5rem 0;
+        }
+
+        .accordion-content .month {
+            background-color: #c4e39f;
+            color: #529e46;
+            font-family: "Play", cursive;
+            text-shadow: 0.5px 0.6px 1px #fefefa;
+            padding: 0 1rem 0 1rem;
+            box-sizing: border-box;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .month {
+            position: relative;
+        }
+
+        /*.month::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background-color: #529e46;
+            border-radius: 4px 0 0 4px;
+        }*/
+
+        strong.date {
+            background-color: #dad2a3;
+            color: #75614d;
+            text-decoration: underline;
+            border-radius: 4px;
+            padding: 0.1rem;
+            margin-right: 0.25rem;
+        }
+
+        strong.hour {
+            background-color: #dad2a3;
+            color: #75614d;
+            text-decoration: underline;
+            border-radius: 4px;
+            padding: 0.1rem;
+            margin-right: 0.25rem;
+        }
+
+        .accordion-content .log {
+            padding: 0 0.75rem;
+            margin: 0.25rem 0 0.5rem 0;
+            color: #1a1a1a;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 0.625rem;
+        }
+
+        /* divisor visual */
+        .divider {
+            width: 1px;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0.6;
+            border-radius: 1px;
+            margin-block: 1rem;
+        }
+
+        #entries-quote-music-box {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            /* branco com transparência */
+            height: 296px;
+            overflow: auto;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .quote-music,
+        .webrings,
+        .daily-photo {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* Fim do Conteúdo Central */
+        /*
+        **
+        **/
+
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-bottom: #bfad83 solid 1px;
+            }
+
+            #content {
+                margin-left: 0;
+                padding-inline: 1em;
+                width: 100%;
+            }
+
+            #status-log-box {
+                height: 450px;
+                flex-direction: column;
+            }
+
+            #entries-quote-music-box {
+                height: 750px;
+                flex-direction: column;
+            }
+
+            .divider {
+                width: 100%;
+                height: 1px;
+                margin-block: 0.5rem;
+            }
+        }
+
+        /* fonts */
+        .play-regular {
+            font-family: "Play", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .play-bold {
+            font-family: "Play", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .sorts-mill-goudy-regular {
+            font-family: "Sorts Mill Goudy", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .sorts-mill-goudy-regular-italic {
+            font-family: "Sorts Mill Goudy", serif;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .silkscreen-regular {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .silkscreen-bold {
+            font-family: "Silkscreen", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: '04b03';
+            src: url('04b03.woff2') format('woff2'), url('04b03.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h5 {
+            font-family: 'Play', sans-serif;
+            color: #fefefe;
+            /* branco suave */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            /* sombrazinha delicada */
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ribbon"></div>
+
+    <main id="container">
+        <!-- ... (todo o conteúdo acima permanece igual até o <aside id="sidebar">) -->
+
+        <aside id="sidebar">
+            <div id="mobile-menu">
+                <div class="profile">
+                    <img src="profile.png" alt="Foto de Ennoniel" class="profile-pic">
+                    <p class="description">
+                        Oi, eu sou Igor! Pretendo compartilhar aqui algumas coisas legais sobre o que estou lendo, assistindo, fazendo ou aprendendo. No momento estou resolvendo a vida, e por enquanto ennoniel permanece como um projeto inacabado. Talvez, algum dia, eu dê continuidade a este cantinho na web.
+                    </p>
+                </div>
+
+                <div class="hamburger-wrapper">
+                    <div class="hamburger" onclick="toggleMenu()">☰</div>
+                </div>
+
+                <!-- 🌟 MENU DE BOTÕES PEQUENOS ESTILO PIXEL -->
+                <nav class="menu">
+                    <div class="menu-row">
+                        <a href="/">Home</a>
+                        <a href="/" target="_blank">About</a>
+                        <a href="/link1" target="_blank">Link</a>
+                        <a href="/link2" target="_blank">Link</a>
+                        <a href="link3" target="_blank">Link</a>
+                        <a href="link4" target="_blank">Link</a>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <div id="content">
+            <div id="status-log-box">
+
+                <section class="my-status">
+                    <h3>My status</h3>
+                    <p><strong>Feeling</strong>:
+                        <a href="https://www.imood.com/users/ennoniel">
+                            <img src="https://moods.imood.com/display/uname-ennoniel/trans-1/imood.gif" alt="The current mood of ennoniel at www.imood.com" border="0" class="feeling">
+                        </a>
+                    </p>
+                    <p>
+                        <img src="working.gif" alt="">
+                        <strong>Working on</strong>: Programming this site!
+                    </p>
+                    <p>
+                        <img src="grimoire_by_pokebladered.png" alt="">
+                        <strong>Reading</strong>: Lucíola <em>(José de Alencar)</em>, Hermaphrodite <em>(Marie
+                            Delcourt)</em>, O Gozo das Feiticeiras <em>(Márcia Frazão)</em>
+                    </p>
+                    <p>
+                        <img src="watching.gif" alt="">
+                        <strong>Watching</strong>: The Lord of the Rings: The Rings Of Power Season 2 <em>(Amazon
+                            Prime)</em>
+                    </p>
+                    <p>
+                        <img src="sax.gif" alt="">
+                        <strong>Listening</strong>: Watermark <em>(Enya)</em>
+                    </p>
+                    <p>
+                        <img src="dvd.gif" alt="">
+                        <strong>Movie featured</strong>: The Danish Girl <em>(Director: Tom Hooper)</em>
+                    </p>
+                    <p>
+                        <img src="film.gif" alt="">
+                        <strong>Short featured</strong>: Nothing for now.
+                    </p>
+                    <p>
+                        <img src="music.gif" alt="">
+                        <strong>Song featured</strong>: Ave Maria <em>(Barbra Streisand)</em>
+                    </p>
+                    <p>
+                        <img src="camera.gif" alt="">
+                        <strong>Video featured</strong>: Nothing for now.
+                    </p>
+                    <div class="mail-owl">
+                        <p>Owl mail coming soon, right here.</p>
+                    </div>
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="update-log">
+                    <h3>Update Log</h3>
+                    <div class="accordion">
+                        <button class="accordion-year" onclick="toggleAccordion(this)">
+                            2025 <span class="arrow"><img src="arrow-down.gif" alt=""> </span>
+                        </button>
+                        <div class="accordion-content">
+                            <p class="month">April</p>
+                            <p class="log">
+                                <strong class="date">Apr 21</strong> <strong class="hour">12:45 pm</strong> imood alterado. hoje estou me sentido melhor, yay!
+                            </p>
+                            <p class="log">
+                                <strong class="date">Apr 21</strong> <strong class="hour">12:28 pm</strong> tiny gifs e alguns ajustes de espaçamento adicionados à class status-log-box.
+                            </p>
+                            <p class="log">
+                                <strong class="date">Apr 20</strong> <strong class="hour">23:00 pm</strong> organizing
+                                the bare minimum to make this site's layout presentable, before taking a brief break.
+                            </p>
+
+                            <!--<p class="month">Novembro</p>
+                            <p class="log">• Comecei o projeto do site no Neocities!</p>
+                            -->
+                        </div>
+                    </div>
+
+
+                    <!--
+                    <h3>Update Log</h3>
+                    <p class="log-2025">2025</p>
+                    
+                    <p>
+                        <strong>Apr 20</strong>
+                    </p>
+                    <p>
+                        short description
+                    </p>-->
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="entries">
+                    <h3>Tiny Entries</h3>
+                    <p>
+                        <strong>Apr 21 • 12:06 pm</strong>
+                    </p>
+                    <div class="mail-owl">
+                        <p>Owl mail coming soon, right here.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div id="entries-quote-music-box">
+
+                <section class="daily-photo">
+                    <h3>Daily Photo</h3>
+                    <p>Under Construction!</p>
+                    <img src="stamp_i_love_photography_by_kaifcsl.gif" alt="">
+                    <p><strong>source</strong>: <a href="">author</a></p>
+                    <p><strong>Idea:</strong> some text here...</p>
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="quote-music">
+                    <h3>Thoughts & Songs</h3>
+                    <p>
+                        <img src="music.gif" alt=""> Under Construction.
+                    </p>
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="webrings">
+                    <h3>Webrings</h3>
+                    <p>
+                        <img src="globe.gif" alt=""> Under Construction.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.arrow');
+            const isOpen = content.style.display === 'block';
+
+            content.style.display = isOpen ? 'none' : 'block';
+            arrow.innerHTML = isOpen
+                ? "<img src='arrow-down.gif' alt='Seta para baixo' width='32'>"
+                : "<img src='arrow-up.gif' alt='Seta para cima' width='32'>";
+
+        }
+
+    </script>
+</body>
+
+</html>
